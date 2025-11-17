@@ -1,6 +1,74 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 
+// --- Animation Hooks & Components ---
+const useOnScreen = (
+  ref: React.RefObject<HTMLElement>,
+  options: IntersectionObserverInit & { triggerOnce?: boolean } = { threshold: 0.1, triggerOnce: true }
+) => {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIntersecting(true);
+        if (options.triggerOnce && ref.current) {
+          observer.unobserve(ref.current);
+        }
+      }
+    }, options);
+
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [ref, options]);
+
+  return isIntersecting;
+};
+
+const useCountUp = (end: number, duration: number, startOnScreen: boolean, start = 0) => {
+    const [count, setCount] = useState(start);
+    const easeOutCubic = (t: number) => (--t) * t * t + 1;
+
+    useEffect(() => {
+        if (startOnScreen) {
+            let startTime: number | null = null;
+            const animationFrame = (timestamp: number) => {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+                const percentage = Math.min(progress / duration, 1);
+                const easedPercentage = easeOutCubic(percentage);
+                const currentVal = Math.floor(easedPercentage * (end - start) + start);
+                
+                setCount(currentVal);
+
+                if (progress < duration) {
+                    requestAnimationFrame(animationFrame);
+                }
+            };
+            requestAnimationFrame(animationFrame);
+        }
+    }, [end, duration, start, startOnScreen]);
+
+    return count;
+};
+
+const AnimatedNumber: React.FC<{ value: number; duration?: number; className?: string; prefix?: string; suffix?: string }> = ({ value, duration = 1500, className, prefix, suffix }) => {
+    const ref = useRef<HTMLSpanElement>(null);
+    const isOnScreen = useOnScreen(ref);
+    const count = useCountUp(value, duration, isOnScreen);
+
+    return <span ref={ref} className={className}>{prefix}{count.toLocaleString('en-US')}{suffix}</span>;
+};
+
+
 // --- SVG Icon Components ---
 const IconWrapper: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
     <div className={`inline-flex items-center justify-center ${className}`}>
@@ -171,11 +239,20 @@ const offerDetails = {
 };
 
 // --- Helper & UI Components ---
-const Section: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-    <section className={`w-full max-w-3xl mx-auto px-4 py-7 md:py-14 ${className}`}>
-        {children}
-    </section>
-);
+const Section: React.FC<{ children: React.ReactNode; className?: string, animated?: boolean }> = ({ children, className = '', animated = false }) => {
+    const ref = useRef<HTMLElement>(null);
+    const isOnScreen = useOnScreen(ref, { threshold: 0.1, triggerOnce: true });
+
+    return (
+        <section
+            ref={ref}
+            className={`w-full max-w-3xl mx-auto px-4 py-7 md:py-14 transition-all duration-700 ease-out ${className} ${animated ? (isOnScreen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5') : ''}`}
+        >
+            {children}
+        </section>
+    );
+};
+
 
 const Accordion: React.FC<{ category: typeof addonCategories[0] }> = ({ category }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -193,8 +270,8 @@ const Accordion: React.FC<{ category: typeof addonCategories[0] }> = ({ category
                 </div>
                 <ChevronIcon className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''} text-white/50`} />
             </button>
-            {isOpen && (
-                <div className="pb-4 space-y-4">
+            <div className={`transition-[max-height,opacity] duration-500 ease-in-out overflow-hidden ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className="pt-2 pb-4 space-y-4">
                     {category.items.map((item, index) => (
                         <div key={index} className="pl-9 flex justify-between items-start">
                             <div>
@@ -211,25 +288,29 @@ const Accordion: React.FC<{ category: typeof addonCategories[0] }> = ({ category
                         </div>
                     ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 };
 
-const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: boolean }> = ({ packageInfo, isFeatured = false }) => {
+const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: boolean, delay: number }> = ({ packageInfo, isFeatured = false, delay }) => {
     const { name, price, description, promise, photos, videoBonus, bestFor, isMostBooked } = packageInfo;
-    const cardBaseClasses = "rounded-[30px] border p-6 md:p-7 flex flex-col transition-all duration-300";
-    const featuredClasses = "bg-gradient-to-b from-[#161720] to-[#0A0B12] border-white/10 shadow-2xl shadow-black/70 scale-100 md:scale-105";
-    const standardClasses = "bg-[#0E0F1A] border-white/5";
+    const cardRef = useRef<HTMLDivElement>(null);
+    const isOnScreen = useOnScreen(cardRef, { threshold: 0.2, triggerOnce: true });
+
+    const cardBaseClasses = "rounded-[30px] border p-6 md:p-7 flex flex-col transition-all duration-300 transform-gpu";
+    const featuredClasses = "bg-gradient-to-b from-[#161720] to-[#0A0B12] border-white/10 shadow-2xl shadow-black/70 scale-100 md:scale-105 hover:shadow-purple-500/20";
+    const standardClasses = "bg-[#0E0F1A] border-white/5 hover:border-white/15 hover:scale-[1.02]";
 
     return (
-        <div className={`${cardBaseClasses} ${isFeatured ? featuredClasses : standardClasses}`}>
+        <div ref={cardRef} className={`${cardBaseClasses} ${isFeatured ? featuredClasses : standardClasses} ${isOnScreen ? 'animate-fade-in-up' : 'opacity-0'}`} style={{animationDelay: `${delay}ms`}}>
             {/* Header band */}
             <div className="mb-4">
                  {isMostBooked && <p className="text-[12px] font-medium tracking-[1.2px] text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full w-fit mb-3">MOST BOOKED</p>}
                 <h3 className="text-xl font-semibold text-[#E2E0F0]">{name} Package</h3>
                 <p className="text-4xl font-bold text-[#F7F5FF] mt-1">
-                    <span className="text-lg font-medium text-white/50 align-baseline mr-1">CA$</span>{price}
+                    <span className="text-lg font-medium text-white/50 align-baseline mr-1">CA$</span>
+                    <AnimatedNumber value={price} />
                 </p>
                 <p className="text-sm font-medium text-white/50 tracking-wider mt-1">{description}</p>
             </div>
@@ -245,7 +326,7 @@ const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: bool
                 {/* Photos */}
                 <ul className="space-y-2.5">
                     {photos.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3">
+                        <li key={i} className={`flex items-start gap-3 transition-all duration-500 ease-out ${isOnScreen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`} style={{ transitionDelay: `${300 + i * 100}ms` }}>
                             <CheckmarkLineIcon />
                             <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
                         </li>
@@ -257,12 +338,12 @@ const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: bool
                     <div className="flex justify-between items-center mb-2">
                         <p className="text-[13px] font-semibold text-green-300">Holiday Video Bonus</p>
                         <span className="text-xs font-bold text-red-400 line-through">
-                            CA${videoBonus.value} value
+                            CA$<AnimatedNumber value={videoBonus.value} duration={1000} /> value
                         </span>
                     </div>
                     <ul className="space-y-1.5">
                         {videoBonus.items.map((item, i) => (
-                            <li key={i} className="flex items-start gap-3">
+                             <li key={i} className={`flex items-start gap-3 transition-all duration-500 ease-out ${isOnScreen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`} style={{ transitionDelay: `${600 + i * 100}ms` }}>
                                 <CheckmarkLineIcon />
                                 <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
                             </li>
@@ -273,7 +354,7 @@ const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: bool
 
             {/* Meta band */}
             <div className="mt-auto pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                <p className="text-[15px] font-semibold text-[#55E6C1]">You save: CA${videoBonus.value}</p>
+                <p className="text-[15px] font-semibold text-[#55E6C1]">You save: CA$<AnimatedNumber value={videoBonus.value} duration={1000} /></p>
                 <p className="text-[12px] font-medium text-purple-300 bg-purple-500/20 px-3 py-1.5 rounded-full text-center">{bestFor}</p>
             </div>
         </div>
@@ -313,7 +394,7 @@ const App = () => {
             </Section>
 
             {/* Packages Intro */}
-            <Section>
+            <Section animated>
                 <h2 className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] text-center mb-6">Holiday Content Packages</h2>
                 <div className="bg-[#0E0F1A] border border-white/5 rounded-2xl p-6 grid md:grid-cols-2 gap-x-8 gap-y-6">
                     <div>
@@ -325,7 +406,7 @@ const App = () => {
                         </ul>
                     </div>
                     <div className="bg-slate-800/50 border border-white/10 rounded-lg p-4 flex flex-col justify-center text-center">
-                        <p className="text-[18px] font-semibold leading-[1.3] text-[#E2E0F0]">Video content gets shared up to <span className="text-cyan-300">1200%</span> more than photos alone.</p>
+                        <p className="text-[18px] font-semibold leading-[1.3] text-[#E2E0F0]">Video content gets shared up to <span className="text-cyan-300"><AnimatedNumber value={1200} suffix="%" /></span> more than photos alone.</p>
                         <p className="text-[15px] font-regular leading-[1.5] text-white/80 mt-2">That’s why every package includes free video content.</p>
                     </div>
                 </div>
@@ -335,13 +416,13 @@ const App = () => {
             <Section className="!max-w-5xl">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {packages.map((pkg, index) => (
-                        <PackageCard key={index} packageInfo={pkg} isFeatured={pkg.isMostBooked} />
+                        <PackageCard key={index} packageInfo={pkg} isFeatured={pkg.isMostBooked} delay={index * 150} />
                     ))}
                 </div>
             </Section>
 
             {/* Compare Packages */}
-            <Section>
+            <Section animated>
                 <h2 className="text-center text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] mb-6">Compare Packages</h2>
                 <div className="bg-[#0E0F1A] border border-white/5 rounded-2xl overflow-hidden">
                     <div className="overflow-x-auto scrollbar-hide">
@@ -373,7 +454,7 @@ const App = () => {
             </Section>
 
             {/* Why Investing Now Matters */}
-            <Section>
+            <Section animated>
                 <h2 className="text-center text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] mb-6">Why Investing Now Matters</h2>
                 <div className="grid md:grid-cols-3 gap-4">
                     {investmentReasons.map((reason, i) => (
@@ -390,7 +471,7 @@ const App = () => {
             </Section>
 
             {/* Testimonials */}
-            <Section>
+            <Section animated>
                 <h2 className="text-center text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] mb-2">Trusted by Brands Like Yours</h2>
                 <p className="text-center text-[15px] leading-[1.5] text-white/60 mb-6">A few notes from teams who invested in quality.</p>
                 <div className="relative h-48">
@@ -416,7 +497,7 @@ const App = () => {
             </Section>
 
             {/* Supercharge Your Package */}
-            <Section>
+            <Section animated>
                 <div className="text-center mb-8 mt-6">
                     <h2 className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8]">Supercharge Your Package</h2>
                     <p className="text-[15px] leading-[1.5] text-white/60 mt-2">Pick optional upgrades to perfectly match your campaign goals.</p>
@@ -427,7 +508,7 @@ const App = () => {
             </Section>
 
             {/* Limited-Time Offer */}
-            <Section>
+            <Section animated>
                 <div className="bg-gradient-to-br from-purple-800/50 to-indigo-800/30 border border-purple-400/30 rounded-3xl p-6 md:p-8 text-center relative overflow-hidden">
                     <div className="absolute -top-10 -right-10 w-28 h-28 bg-yellow-400/80 rounded-full blur-3xl"></div>
                     <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-cyan-400/60 rounded-full blur-3xl"></div>
@@ -446,7 +527,7 @@ const App = () => {
             </Section>
 
             {/* Final CTA */}
-            <Section className="text-center">
+            <Section animated className="text-center">
                 <h2 className="text-[32px] font-semibold leading-[1.1] text-[#F7F5FF] -tracking-[1px] max-w-lg mx-auto">Ready for Your Best Holiday Season Yet?</h2>
                 <p className="text-[15px] leading-[1.5] text-white/60 mt-4 mb-8 max-w-md mx-auto">Reply with your chosen package to lock in your spot. We'll handle the rest.</p>
                 <div className="flex flex-col md:flex-row justify-center items-center gap-4">
@@ -460,7 +541,7 @@ const App = () => {
             </Section>
 
             {/* Message Card */}
-            <Section className="pb-20">
+            <Section animated className="pb-20">
                 <div className="bg-[#121422] border border-white/10 rounded-2xl p-4 flex items-start gap-3">
                     <IconWrapper className="w-8 h-8 rounded-full bg-slate-700/80 shrink-0">
                         <CopyIcon />
