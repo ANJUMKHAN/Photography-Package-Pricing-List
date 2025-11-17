@@ -77,8 +77,8 @@ const IconWrapper: React.FC<{ children: React.ReactNode; className?: string }> =
 );
 
 const StarIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.32 1.011l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .32-1.011l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>;
-const FireIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 3.75 3.75 0 0 0-1.993-2.158A5.25 5.25 0 0 0 8.25 12a7.5 7.5 0 0 0 7.5 7.5 8.953 8.953 0 0 0-3.255-5.25Z" /></svg>;
-const SparklesIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" /></svg>;
+const FireIcon = () => <svg xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 3.75 3.75 0 0 0-1.993-2.158A5.25 5.25 0 0 0 8.25 12a7.5 7.5 0 0 0 7.5 7.5 8.953 8.953 0 0 0-3.255-5.25Z" /></svg>;
+const SparklesIcon = () => <svg xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" /></svg>;
 const CalendarIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-full h-full"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0h18" /></svg>;
 const PlayIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-full h-full"><path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" /></svg>;
 const RoiIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-full h-full"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>;
@@ -86,7 +86,7 @@ const CopyIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewB
 
 
 const ChevronIcon: React.FC<{ className?: string }> = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className={`w-5 h-5 ${className}`}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
-const CheckmarkLineIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-[#55E6C1] opacity-70 shrink-0 mt-1"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
+const CheckmarkLineIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 text-purple-400 shrink-0 mt-1"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
 
 const MinusIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-600"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" /></svg>;
 
@@ -101,6 +101,7 @@ const icons: { [key: string]: React.FC } = {
 const packages = [
     {
         name: "Starter",
+        icon: StarIcon,
         price: 350,
         description: "For testing pro content",
         promise: "Perfect for small brands testing the waters with professionally shot content.",
@@ -123,6 +124,7 @@ const packages = [
     },
     {
         name: "Essentials",
+        icon: FireIcon,
         price: 500,
         description: "For growing brands",
         promise: "Most popular for holiday launches and small collections.",
@@ -145,6 +147,7 @@ const packages = [
     },
     {
         name: "Complete",
+        icon: SparklesIcon,
         price: 1000,
         description: "For full campaigns",
         promise: "The all-in-one solution for a full holiday campaign rollout.",
@@ -159,7 +162,7 @@ const packages = [
             items: [
                 "30 professionally produced clips",
                 "5 ready-to-post vertical videos (15-60 sec)",
-                "Full campaign's worth of video assets",
+                "Full campaign’s worth of video assets",
             ],
         },
         bestFor: "Large collections, multi-platform campaigns",
@@ -294,50 +297,60 @@ const Accordion: React.FC<{ category: typeof addonCategories[0] }> = ({ category
 };
 
 const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: boolean, delay: number }> = ({ packageInfo, isFeatured = false, delay }) => {
-    const { name, price, description, promise, photos, videoBonus, bestFor, isMostBooked } = packageInfo;
+    const { name, icon: Icon, price, description, promise, photos, videoBonus, bestFor, isMostBooked } = packageInfo;
     const cardRef = useRef<HTMLDivElement>(null);
     const isOnScreen = useOnScreen(cardRef, { threshold: 0.2, triggerOnce: true });
 
-    const cardBaseClasses = "rounded-[30px] border p-6 md:p-7 flex flex-col transition-all duration-300 transform-gpu";
+    const cardBaseClasses = "rounded-3xl border p-6 md:p-7 flex flex-col transition-all duration-300 transform-gpu space-y-5";
     const featuredClasses = "bg-gradient-to-b from-[#161720] to-[#0A0B12] border-white/10 shadow-2xl shadow-black/70 scale-100 md:scale-105 hover:shadow-purple-500/20";
     const standardClasses = "bg-[#0E0F1A] border-white/5 hover:border-white/15 hover:scale-[1.02]";
 
     return (
         <div ref={cardRef} className={`${cardBaseClasses} ${isFeatured ? featuredClasses : standardClasses} ${isOnScreen ? 'animate-fade-in-up' : 'opacity-0'}`} style={{animationDelay: `${delay}ms`}}>
-            {/* Header band */}
-            <div className="mb-4">
-                 {isMostBooked && <p className="text-[12px] font-medium tracking-[1.2px] text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full w-fit mb-3">MOST BOOKED</p>}
-                <h3 className="text-xl font-semibold text-[#E2E0F0]">{name} Package</h3>
-                <p className="text-4xl font-bold text-[#F7F5FF] mt-1">
-                    <span className="text-lg font-medium text-white/50 align-baseline mr-1">CA$</span>
-                    <AnimatedNumber value={price} />
-                </p>
-                <p className="text-sm font-medium text-white/50 tracking-wider mt-1">{description}</p>
+             {isMostBooked && <p className="absolute -top-3 left-1/2 -translate-x-1/2 text-[12px] font-medium tracking-[1.2px] text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full w-fit">MOST BOOKED</p>}
+            
+            {/* Zone 1: Top Band */}
+            <div>
+                <div className="flex justify-between items-start">
+                    <div>
+                        <h3 className="text-lg font-semibold text-[#E2E0F0]">{name} Package</h3>
+                        <p className="text-xs font-medium text-white/50 tracking-wider mt-1">{description}</p>
+                    </div>
+                    <IconWrapper className="w-10 h-10 bg-white/5 text-purple-300 rounded-lg">
+                        <Icon />
+                    </IconWrapper>
+                </div>
+                <div className="mt-4">
+                    <p className="text-3xl font-bold text-[#F7F5FF]">
+                        <span className="text-base font-medium text-white/50 align-baseline mr-1">CA$</span>
+                        <AnimatedNumber value={price} />
+                    </p>
+                    <p className="text-xs uppercase font-bold text-white/40 tracking-widest mt-1">Per content package</p>
+                </div>
             </div>
 
-            {/* Promise band */}
-            <p className="text-[15px] font-regular leading-[1.5] text-white/80 my-3">{promise}</p>
+            {/* Zone 2: "Who it's for" */}
+            <p className="text-sm font-regular leading-relaxed text-white/70 pt-2">{promise}</p>
 
-            {/* Separator */}
-            <div className="w-full h-px bg-white/10 my-4"></div>
+            <div className="flex-grow space-y-5">
+                {/* Zone 3: Photo Block */}
+                <div className="border-t border-white/10 pt-5">
+                     <h4 className="text-xs uppercase font-bold text-white/40 tracking-widest mb-3">Photo Set</h4>
+                    <ul className="space-y-2">
+                        {photos.map((item, i) => (
+                             <li key={i} className={`flex items-start gap-3 transition-all duration-500 ease-out ${isOnScreen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`} style={{ transitionDelay: `${300 + i * 100}ms` }}>
+                                <CheckmarkLineIcon />
+                                <span className="text-sm font-regular leading-relaxed text-white/80">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-            {/* Features List */}
-            <div className="space-y-5 flex-grow">
-                {/* Photos */}
-                <ul className="space-y-2.5">
-                    {photos.map((item, i) => (
-                        <li key={i} className={`flex items-start gap-3 transition-all duration-500 ease-out ${isOnScreen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`} style={{ transitionDelay: `${300 + i * 100}ms` }}>
-                            <CheckmarkLineIcon />
-                            <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
-                        </li>
-                    ))}
-                </ul>
-
-                {/* Video Bonus */}
-                <div className="bg-green-900/20 border border-green-500/20 rounded-2xl p-4">
-                    <div className="flex justify-between items-center mb-2">
-                        <p className="text-[13px] font-semibold text-green-300">Holiday Video Bonus</p>
-                        <span className="text-xs font-bold text-red-400 line-through">
+                {/* Zone 4: Video Block */}
+                 <div className="bg-black/20 border border-white/10 rounded-2xl p-4">
+                    <div className="flex justify-between items-center mb-3">
+                        <p className="text-xs uppercase font-bold text-white/40 tracking-widest">Holiday Video Bonus</p>
+                        <span className="text-xs font-bold text-red-400/70 line-through">
                             CA$<AnimatedNumber value={videoBonus.value} duration={1000} /> value
                         </span>
                     </div>
@@ -345,17 +358,17 @@ const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: bool
                         {videoBonus.items.map((item, i) => (
                              <li key={i} className={`flex items-start gap-3 transition-all duration-500 ease-out ${isOnScreen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`} style={{ transitionDelay: `${600 + i * 100}ms` }}>
                                 <CheckmarkLineIcon />
-                                <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
+                                <span className="text-sm font-regular leading-relaxed text-white/80">{item}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
             </div>
 
-            {/* Meta band */}
-            <div className="mt-auto pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                <p className="text-[15px] font-semibold text-[#55E6C1]">You save: CA$<AnimatedNumber value={videoBonus.value} duration={1000} /></p>
-                <p className="text-[12px] font-medium text-purple-300 bg-purple-500/20 px-3 py-1.5 rounded-full text-center">{bestFor}</p>
+            {/* Zone 5: Footer Strip */}
+            <div className="mt-auto pt-5 border-t border-white/10 text-center space-y-3">
+                <p className="text-base font-semibold text-purple-300">You save: CA$<AnimatedNumber value={videoBonus.value} duration={1000} /></p>
+                <p className="text-xs font-medium text-purple-300 bg-purple-500/20 px-3 py-1.5 rounded-full inline-block">{bestFor}</p>
             </div>
         </div>
     );
@@ -393,31 +406,29 @@ const App = () => {
                 <p style={{'--delay': '0.3s'} as React.CSSProperties} className={`${FADE_IN_CLASSES} text-[15px] leading-[1.5] text-white/80 max-w-xl mx-auto mt-8 md:mt-10`}>Blurry, DIY photos kill trust. In a sea of holiday noise, professional content isn’t a luxury—it’s your ticket to getting noticed and getting paid.</p>
             </Section>
 
-            {/* Packages Intro */}
-            <Section animated>
-                <h2 className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] text-center mb-6">Holiday Content Packages</h2>
-                <div className="bg-[#0E0F1A] border border-white/5 rounded-2xl p-6 grid md:grid-cols-2 gap-x-8 gap-y-6">
-                    <div>
-                        <p className="text-[15px] font-regular leading-[1.5] text-white/80 mb-4">All packages are shot & directed by a professional team with years of e-commerce experience.</p>
-                        <ul className="space-y-2 text-[15px] font-regular leading-[1.5] text-white/80">
-                            <li className="flex items-center gap-3"><CheckmarkLineIcon /> Ready to post on social, website & ads</li>
-                            <li className="flex items-center gap-3"><CheckmarkLineIcon /> Designed to work across multiple platforms</li>
-                            <li className="flex items-center gap-3"><CheckmarkLineIcon /> High-resolution for crystal-clear quality</li>
-                        </ul>
-                    </div>
-                    <div className="bg-slate-800/50 border border-white/10 rounded-lg p-4 flex flex-col justify-center text-center">
-                        <p className="text-[18px] font-semibold leading-[1.3] text-[#E2E0F0]">Video content gets shared up to <span className="text-cyan-300"><AnimatedNumber value={1200} suffix="%" /></span> more than photos alone.</p>
-                        <p className="text-[15px] font-regular leading-[1.5] text-white/80 mt-2">That’s why every package includes free video content.</p>
-                    </div>
+            {/* Packages Section */}
+            <Section animated className="!py-4">
+                <div className="text-center">
+                    <h2 className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8]">Holiday Content Packages</h2>
+                    <p className="text-[15px] leading-[1.5] text-white/60 mt-2 max-w-2xl mx-auto">Stop-the-scroll product content, shot and directed for your holiday sales push.</p>
+                    <p className="text-xs uppercase font-bold text-purple-300/80 tracking-widest mt-4">Every package includes complimentary holiday video content.</p>
                 </div>
             </Section>
 
             {/* Package Cards */}
-            <Section className="!max-w-5xl">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <Section className="!max-w-6xl !pt-4">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
                     {packages.map((pkg, index) => (
                         <PackageCard key={index} packageInfo={pkg} isFeatured={pkg.isMostBooked} delay={index * 150} />
                     ))}
+                </div>
+            </Section>
+
+            {/* Video Stat Summary */}
+             <Section animated className="!pt-4">
+                <div className="bg-slate-800/50 border border-white/10 rounded-2xl p-5 flex flex-col justify-center text-center max-w-2xl mx-auto">
+                    <p className="text-lg font-semibold leading-[1.3] text-[#E2E0F0]">Video content gets shared up to <span className="text-cyan-300"><AnimatedNumber value={1200} suffix="%" /></span> more than photos alone.</p>
+                    <p className="text-sm font-regular leading-[1.5] text-white/80 mt-2">That’s why every package includes a complimentary holiday video bundle.</p>
                 </div>
             </Section>
 
