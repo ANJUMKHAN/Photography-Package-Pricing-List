@@ -1,5 +1,4 @@
 
-
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 
 // --- SVG Icon Components ---
@@ -19,7 +18,6 @@ const CopyIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewB
 
 
 const ChevronIcon: React.FC<{ className?: string }> = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className={`w-5 h-5 ${className}`}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
-const CheckIcon = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-teal-400"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.052-.143Z" clipRule="evenodd" /></svg>;
 const CheckmarkLineIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-[#55E6C1] opacity-70"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
 
 const MinusIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-600"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" /></svg>;
@@ -31,225 +29,251 @@ const icons: { [key: string]: React.FC } = {
     'business-boosters': () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>,
 };
 
-
-// --- Data Structures ---
+// --- Data ---
 const packages = [
-  {
-    icon: <StarIcon />,
-    title: 'Starter',
-    tag: 'For testing pro content',
-    price: 350,
-    description: 'Perfect for small brands taking their first step into professional content.',
-    photoFeatures: [
-      '10 professionally edited product photos',
-      'Multiple angles to show details & textures',
-      'Clean, sharp, ultra–high-resolution quality',
-      'Files optimized for Instagram & web',
-    ],
-    bonus: {
-      title: 'Holiday video bonus included',
-      value: 250,
-      features: [
-        '5 professionally shot video clips',
-        '1 ready-to-post Reel/TikTok (15–30 sec)',
-      ],
+    {
+        name: "Starter",
+        price: 350,
+        description: "For testing pro content",
+        promise: "Perfect for small brands testing the waters with professionally shot content.",
+        photos: [
+            "10 magazine-level product photos",
+            "Basic brand-aligned styling",
+            "Product focused shots",
+            "Delivered ready for social & website",
+        ],
+        videoBonus: {
+            value: 250,
+            items: [
+                "5 professionally produced clips",
+                "1 ready-to-post vertical video (15 sec)",
+                "Perfect for a single promo post",
+            ],
+        },
+        bestFor: "Up to 3 products, single promos",
+        isMostBooked: false,
     },
-    savings: 250,
-    bestFor: '1–3 hero products, gift sets, or a new launch.',
-    isPopular: false,
-  },
-  {
-    icon: <FireIcon />,
-    title: 'Essentials',
-    tag: 'For growing brands',
-    price: 500,
-    description: 'Most popular for holiday launches and small collections.',
-    photoFeatures: [
-        '20 magazine-level product photos',
-        'Creative styling aligned with your brand',
-        'Mix of lifestyle, detail & hero shots',
-        'Delivered ready for social, website & ads'
-    ],
-    bonus: {
-        title: 'Holiday video bonus included',
-        value: 450,
-        features: [
-            '15 professionally produced clips',
-            '3 ready-to-post vertical videos (15–30 sec)',
-            'Enough content for a full week of daily posts'
-        ]
+    {
+        name: "Essentials",
+        price: 500,
+        description: "For growing brands",
+        promise: "Most popular for holiday launches and small collections.",
+        photos: [
+            "20 magazine-level product photos",
+            "Creative styling aligned with your brand",
+            "Mix of lifestyle, detail & hero shots",
+            "Delivered ready for social, website & ads",
+        ],
+        videoBonus: {
+            value: 450,
+            items: [
+                "15 professionally produced clips",
+                "3 ready-to-post vertical videos (15–30 sec)",
+                "Enough content for a full week of daily posts",
+            ],
+        },
+        bestFor: "Up to 8 products, small collections & promo campaigns",
+        isMostBooked: true,
     },
-    savings: 450,
-    bestFor: 'Up to 8 products, small collections & promo campaigns',
-    isPopular: true,
-  },
-  {
-    icon: <SparklesIcon />,
-    title: 'Complete',
-    tag: 'For full holiday takeover',
-    price: 1000,
-    description: 'For brands that want to dominate the holiday feed and look “bigger than they are.”',
-    photoFeatures: [
-      '30+ billboard-quality, edited photos',
-      'Multiple creative styling concepts',
-      'Professional flat lays, lifestyle & hero shots',
-      'Tight visual consistency for your entire brand',
-    ],
-    bonus: {
-      title: 'MASSIVE Holiday video bundle',
-      value: 900,
-      valueSuffix: '+',
-      features: [
-        '15+ professionally produced video clips',
-        '6 platform-ready vertical videos',
-        'Eye-catching stop-motion or animation',
-        'Custom promotional graphics & infographics',
-      ],
+    {
+        name: "Complete",
+        price: 1000,
+        description: "For full campaigns",
+        promise: "The all-in-one solution for a full holiday campaign rollout.",
+        photos: [
+            "45 magazine-level product photos",
+            "Full creative direction & prop sourcing",
+            "Diverse shot list for all marketing channels",
+            "Priority delivery for fast-moving campaigns",
+        ],
+        videoBonus: {
+            value: 650,
+            items: [
+                "30 professionally produced clips",
+                "5 ready-to-post vertical videos (15-60 sec)",
+                "Full campaign's worth of video assets",
+            ],
+        },
+        bestFor: "Large collections, multi-platform campaigns",
+        isMostBooked: false,
     },
-    savings: 900,
-    savingsSuffix: '+',
-    bestFor: 'Up to 15 products, full collections, or serious campaigns.',
-    isPopular: false,
-  },
 ];
 
-const comparisonFeatures = [
-    { feature: 'Edited Photos', values: ['10', '20', '30+'] },
-    { feature: 'Styling Concepts', values: ['Basic', 'Brand-Aligned', 'Multiple'] },
-    { feature: 'Shot Types', values: ['Product Focused', 'Hero & Lifestyle', 'Hero, Lifestyle & Flat Lay'] },
-    { feature: 'Vertical Videos', values: ['1', '3', '6+'] },
-    { feature: 'Animation / Stop-motion', values: [false, false, true] },
-    { feature: 'Promotional Graphics', values: [false, false, true] },
-    { feature: 'Best For', values: ['New Launches', 'Small Collections', 'Full Campaigns'] },
-];
+const comparisonData = {
+    headers: ["Feature", "Starter", "Essentials", "Complete"],
+    rows: [
+        { feature: "Edited Photos", values: ["10", "20", "45"] },
+        { feature: "Styling Concepts", values: ["Basic", "Creative", "Full Direction"] },
+        { feature: "Shot Style", values: ["Product focused", "Lifestyle & Hero", "Campaign Diverse"] },
+        { feature: "Video Clips", values: ["5", "15", "30"] },
+        { feature: "Ready-to-Post Videos", values: ["1", "3", "5"] },
+        { feature: "Best For", values: ["Single Promos", "Small Collections", "Full Campaigns"] },
+        { feature: "Creative Freedom", values: [<MinusIcon />, <CheckmarkLineIcon />, <CheckmarkLineIcon />] },
+        { feature: "Prop Sourcing", values: [<MinusIcon />, <MinusIcon />, <CheckmarkLineIcon />] },
+    ],
+};
 
-const whyInvestItems = [
-    {
-        icon: <CalendarIcon />,
-        label: "DECEMBER IS DECISION MONTH",
-        body: "Shoppers choose brands that look trustworthy and premium."
-    },
-    {
-        icon: <PlayIcon />,
-        label: "VIDEO WINS ATTENTION",
-        body: "Short-form product videos dramatically boost reach and engagement."
-    },
-    {
-        icon: <RoiIcon />,
-        label: "A HIGH-ROI ASSET",
-        body: "One good shoot can feed your website, ads, and socials for months."
-    }
+const investmentReasons = [
+    { icon: CalendarIcon, label: "DECEMBER IS PEAK SEASON", text: "Capture the highest-intent shoppers of the year." },
+    { icon: PlayIcon, label: "VIDEO IS KING", text: "Dominate feeds with scroll-stopping video content." },
+    { icon: RoiIcon, label: "MAXIMIZE YOUR ROI", text: "Turn your ad spend into profit with high-converting creative." },
 ];
 
 const testimonials = [
-    {
-        quote: "The photos were game-changing. Our holiday sales jumped 40% compared to last year. The quality immediately built trust with new customers.",
-        name: "Jessica Vance",
-        brand: "Glow & Co. Skincare",
-    },
-    {
-        quote: "I was blown away. They captured our brand's vibe perfectly and delivered a ton of content we've been using across all our channels. The video clips were a huge bonus!",
-        name: "Mark Chen",
-        brand: "Artisan Roast Coffee",
-    },
-    {
-        quote: "The Complete package made us look like a major brand overnight. The consistency and quality across all assets elevated our entire marketing presence. Worth every penny.",
-        name: "Samantha Riley",
-        brand: "Nomad Travel Gear",
-    }
+    { quote: "The holiday campaign photos were stunning and our engagement shot up. We had our best sales month ever!", name: "Jessica Vance", company: "Glow & Co. Skincare", color: "#B394FF" },
+    { quote: "I was blown away by the quality. The video content was a game-changer for our Instagram ads.", name: "Mark Chen", company: "Artisan Brews", color: "#55E6C1" },
+    { quote: "Finally, a content package that understands e-commerce. The assets were perfect for our website, socials, and ads.", name: "Sarah Kim", company: "Modern Minimalist", color: "#FFC960" },
 ];
 
 const addonCategories = [
-    { id: 'prod-upgrades', icon: icons['prod-upgrades'], title: 'Production Upgrades', items: [
-        { name: 'Rush VIP Delivery (24–48 hrs)', price: 200, description: 'Jump to the front of the queue – ideal for last-minute launches.' },
-        { name: 'Extended Showcase Video (60–90 sec)', price: 150, description: 'Perfect for product pages, brand stories, or YouTube.' },
-    ]},
-    { id: 'content-expansion', icon: icons['content-expansion'], title: 'Content Expansion', items: [
-        { name: 'Additional Photos (10+)', price: 30, description: 'Great for more angles/variations. (Base price CA$45).' },
-        { name: 'Lifestyle / Model Integration', price: 250, description: 'Real people using your products = higher conversion.' },
-    ]},
-    { id: 'creative-styling', icon: icons['creative-styling'], title: 'Creative Styling & Premium Details', items: [
-        { name: 'Custom Styled Setup', price: 100, description: 'Christmas, Valentine’s, etc. Brand-specific props, colors, and mood.' },
-        { name: 'Premium Props & Backdrops', price: 125, description: 'Luxury materials, florals, custom surfaces. Ideal for premium products.' },
-    ]},
-    { id: 'business-boosters', icon: icons['business-boosters'], title: 'Business Boosters', items: [
-        { name: 'Brand Marketing Designs', price: 250, description: 'Social + ad templates designed using your fonts, colors, and visual direction.' },
-        { name: '30-Day Content Calendar', price: 150, description: 'What to post, when to post. Includes caption ideas.' },
-    ]},
+    {
+        id: 'prod-upgrades',
+        name: 'Production Upgrades',
+        items: [
+            { name: "Model Add-on", price: 200, description: "Add a professional model to your shoot for lifestyle context." },
+            { name: "Location Fee", price: 150, description: "Shoot at a specific location to match your brand's aesthetic." },
+        ]
+    },
+    {
+        id: 'content-expansion',
+        name: 'Content Expansion',
+        items: [
+            { name: "+10 Photos", price: 150, description: "Double your photo count for more variety." },
+            { name: "+2 Vertical Videos", price: 250, description: "More ready-to-post video content for your feed." },
+        ]
+    },
+    {
+        id: 'creative-styling',
+        name: 'Creative Styling & Premium Details',
+        items: [
+            { name: "Custom Styled Setup", price: 100, description: "A fully custom set designed around your product.", includedNote: "Free with Essentials & Complete" },
+            { name: "Premium Props & Backdrops", price: 75, description: "Access to our library of high-end props and surfaces.", includedNote: "Free with Essentials & Complete" },
+        ]
+    },
+    {
+        id: 'business-boosters',
+        name: 'Business Boosters',
+        items: [
+            { name: "Priority Delivery (48hr)", price: 175, description: "Get your final assets delivered in 2 business days." },
+            { name: "Content Strategy Session", price: 250, description: "A 30-min call to plan your content rollout for max impact." },
+        ]
+    }
 ];
 
-// --- Helper Components ---
-const Section: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => (
-    <section className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 ${className}`}>
+const offerDetails = {
+    title: "Limited-Time December Offer",
+    features: [
+        "Free Content Strategy Session (CA$250 Value)",
+        "20% Off Any Add-on Package",
+        "Guaranteed Delivery Before Dec 15th"
+    ],
+    scarcity: "Only 8 spots left for December shoots."
+};
+
+// --- Helper & UI Components ---
+const Section: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
+    <section className={`w-full max-w-3xl mx-auto px-4 py-7 md:py-14 ${className}`}>
         {children}
     </section>
 );
 
-const SectionTitle: React.FC<{ children: React.ReactNode; }> = ({ children }) => (
-    <h2 className="text-3xl font-semibold text-center text-[#E9E4FF] tracking-tight">{children}</h2>
-);
-
-
-const PackageCard: React.FC<{ pkg: typeof packages[0] }> = ({ pkg }) => {
-    const isPopular = pkg.isPopular;
+const Accordion: React.FC<{ category: typeof addonCategories[0] }> = ({ category }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const Icon = icons[category.id];
 
     return (
-        <div className={`relative rounded-3xl p-7 flex flex-col h-full transition-all duration-300 ease-in-out ${isPopular ? 'md:scale-105 md:z-10 bg-gradient-to-b from-[#161720] to-[#0A0B12] shadow-2xl shadow-black/70' : 'bg-gradient-to-b from-[#121520] to-[#070910] shadow-xl shadow-black/60 md:hover:-translate-y-2'}`}
-             // FIX: Cast style object to React.CSSProperties to allow for CSS custom properties.
-             style={{'--tw-shadow-color': isPopular ? 'rgba(179, 148, 255, 0.15)' : 'transparent', boxShadow: `0 0 0 1px ${isPopular ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)'} inset, 0 24px 60px -10px ${isPopular ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.6)'}`} as React.CSSProperties}>
-            
-            {/* Header Band */}
-            <div className="flex justify-between items-start">
-                <div className="flex-1">
-                    {isPopular && <p className="mb-2 text-xs font-medium uppercase tracking-wider bg-[#B394FF]/15 text-[#B394FF] inline-block px-3 py-1 rounded-full">Most Booked</p>}
-                    <h3 className="text-2xl font-semibold text-[#E9E4FF]">{pkg.title}</h3>
-                    <p className="text-sm font-medium text-white/60">{pkg.tag}</p>
+        <div className="border-b border-white/10">
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex justify-between items-center py-4 text-left"
+            >
+                <div className="flex items-center gap-3">
+                    <IconWrapper className="text-white/70">{Icon && <Icon />}</IconWrapper>
+                    <span className="text-base font-medium text-white/90">{category.name}</span>
+                </div>
+                <ChevronIcon className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''} text-white/50`} />
+            </button>
+            {isOpen && (
+                <div className="pb-4 space-y-4">
+                    {category.items.map((item, index) => (
+                        <div key={index} className="pl-9 flex justify-between items-start">
+                            <div>
+                                <h4 className="text-[15px] font-regular text-white/90 leading-tight flex items-center">{item.name}
+                                {item.includedNote &&
+                                    <span className="ml-2 text-[11px] font-medium tracking-wide text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-full">{item.includedNote}</span>
+                                }
+                                </h4>
+                                <p className="text-[12px] text-white/50 mt-1 leading-snug">{item.description}</p>
+                            </div>
+                            <p className="text-[15px] font-regular text-white/90 shrink-0 ml-4">
+                                +CA${item.price}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: boolean }> = ({ packageInfo, isFeatured = false }) => {
+    const { name, price, description, promise, photos, videoBonus, bestFor, isMostBooked } = packageInfo;
+    const cardBaseClasses = "rounded-[30px] border p-6 md:p-7 flex flex-col transition-all duration-300";
+    const featuredClasses = "bg-gradient-to-b from-[#161720] to-[#0A0B12] border-white/10 shadow-2xl shadow-black/70 scale-100 md:scale-105";
+    const standardClasses = "bg-[#0E0F1A] border-white/5";
+
+    return (
+        <div className={`${cardBaseClasses} ${isFeatured ? featuredClasses : standardClasses}`}>
+            {/* Header band */}
+            <div className="flex justify-between items-start mb-4">
+                <div className="flex flex-col gap-2">
+                    {isMostBooked && <p className="text-[12px] font-medium tracking-[1.2px] text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full w-fit">MOST BOOKED</p>}
+                    <div>
+                        <h3 className="text-[18px] font-semibold leading-[1.3] text-[#E2E0F0]">{name}</h3>
+                        <p className="text-[12px] font-medium text-white/50 tracking-wider">{description}</p>
+                    </div>
                 </div>
                 <div className="text-right">
-                    <p className="text-4xl font-semibold text-white">
-                        <span className="text-2xl font-medium text-gray-400 align-baseline pr-1">CA$</span>{pkg.price}
+                    <p className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8]">
+                        <span className="text-[16px] align-baseline">CA$</span>{price}
                     </p>
-                     <p className="text-sm text-gray-400">Per content package</p>
+                    <p className="text-[12px] font-medium text-white/50 tracking-wider">Per content package</p>
                 </div>
-            </div>
-            <div className="absolute top-4 right-4 text-gray-500">
-                <IconWrapper className="w-6 h-6">{pkg.icon}</IconWrapper>
             </div>
 
-            {/* Promise Band */}
-            <p className="text-base font-medium text-white/80 my-6">{pkg.description}</p>
-            
-            {/* Content Band */}
-            <div className="flex-grow">
-                <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xs uppercase text-white/50 font-semibold tracking-wider">Content You Get</span>
-                    <div className="h-px flex-grow bg-gradient-to-r from-white/10 to-transparent"></div>
+            {/* Promise band */}
+            <p className="text-[15px] font-regular leading-[1.5] text-white/80 my-3">{promise}</p>
+
+            {/* Content band */}
+            <div className="my-4">
+                <div className="flex flex-col items-center mb-4">
+                    <p className="text-[12px] font-medium tracking-[1.2px] uppercase text-white/50">Content You Get</p>
+                    <div className="w-6 h-[1px] bg-white/20 mt-2"></div>
                 </div>
-                
+
                 <div className="grid md:grid-cols-2 gap-4">
-                    {/* Photos Column */}
+                    {/* Photos */}
                     <div>
-                         <h4 className="font-medium text-white/70 mb-2 text-sm">Photos</h4>
-                         <ul className="space-y-2 text-sm text-gray-300 leading-normal">
-                            {pkg.photoFeatures.map((feature, i) => (
-                                <li key={i} className="flex items-start gap-3">
+                        <p className="text-[13px] font-medium text-white/70 mb-2">Photos</p>
+                        <ul className="space-y-2">
+                            {photos.map((item, i) => (
+                                <li key={i} className="flex items-start gap-2">
                                     <CheckmarkLineIcon />
-                                    <span>{feature}</span>
+                                    <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    {/* Video Column */}
-                    <div className="bg-[#55E6C1]/10 rounded-2xl p-4">
-                        <div className="flex justify-between items-center mb-2">
-                           <h4 className="font-medium text-[#55E6C1] text-sm">{pkg.bonus.title}</h4>
-                           <p className="text-xs text-[#55E6C1]/80 font-semibold">CA${pkg.bonus.value} value</p>
-                        </div>
-                         <ul className="space-y-1.5 text-sm text-[#55E6C1]/90">
-                            {pkg.bonus.features.map((bf, k) => (
-                                <li key={k} className="flex items-start gap-2">
-                                    <span className="opacity-80 pt-1">🎁</span>
-                                    <span>{bf}</span>
+
+                    {/* Video Bonus */}
+                    <div className="bg-green-900/20 border border-green-500/20 rounded-2xl p-4">
+                        <p className="text-[13px] font-semibold text-green-300">Holiday video bonus included</p>
+                        <p className="text-[12px] font-medium text-green-400/70 mb-2">CA${videoBonus.value} value</p>
+                        <ul className="space-y-1.5">
+                            {videoBonus.items.map((item, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                    <CheckmarkLineIcon />
+                                    <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
                                 </li>
                             ))}
                         </ul>
@@ -257,15 +281,10 @@ const PackageCard: React.FC<{ pkg: typeof packages[0] }> = ({ pkg }) => {
                 </div>
             </div>
 
-            {/* Meta Band */}
-            <div className="mt-auto pt-6">
-                <div className="border-t border-white/10 w-full my-4"></div>
-                <div className="flex justify-between items-center">
-                    <p className="font-bold text-[#55E6C1] text-sm">You save: CA${pkg.savings}{pkg.savingsSuffix || ''}</p>
-                    <div className="text-sm font-medium bg-[#B394FF]/15 text-[#B394FF] px-3 py-1.5 rounded-full text-center">
-                        Best for: <span className="font-semibold">{pkg.bestFor.split(',')[0]}</span>
-                    </div>
-                </div>
+            {/* Meta band */}
+            <div className="mt-auto pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <p className="text-[15px] font-semibold text-[#55E6C1]">You save: CA${videoBonus.value}</p>
+                <p className="text-[12px] font-medium text-purple-300 bg-purple-500/20 px-3 py-1.5 rounded-full text-center">{bestFor}</p>
             </div>
         </div>
     );
@@ -273,303 +292,198 @@ const PackageCard: React.FC<{ pkg: typeof packages[0] }> = ({ pkg }) => {
 
 
 // --- Main App Component ---
-const App: React.FC = () => {
-    const [openAccordion, setOpenAccordion] = useState<string | null>('prod-upgrades');
-    const [selectedAddons, setSelectedAddons] = useState<{ [key: string]: boolean }>({});
-    const [activePackage, setActivePackage] = useState('Essentials');
-    const [currentTestimonial, setCurrentTestimonial] = useState(0);
-    const [showToast, setShowToast] = useState(false);
-    const toastTimeoutRef = useRef<number | null>(null);
+const App = () => {
+    const [activeTestimonial, setActiveTestimonial] = useState(0);
+    const [copiedPackage, setCopiedPackage] = useState<string | null>(null);
 
-    const nextTestimonial = () => {
-        setCurrentTestimonial(current => (current + 1) % testimonials.length);
-    };
-
-    const prevTestimonial = () => {
-        setCurrentTestimonial(current => (current - 1 + testimonials.length) % testimonials.length);
-    };
-
-    const toggleAccordion = (id: string) => {
-        setOpenAccordion(openAccordion === id ? null : id);
-    };
-
-    const handleAddonToggle = (addonName: string) => {
-        setSelectedAddons(prev => ({ ...prev, [addonName]: !prev[addonName] }));
-    };
-
-    const fullMessageString = useMemo(() => {
-        const chosenAddons = Object.keys(selectedAddons).filter(key => selectedAddons[key]);
-        let base = `I'm interested in the ${activePackage} package`;
-
-        if (chosenAddons.length > 0) {
-            const addonNames = chosenAddons.map(name => `the "${name}" add-on`);
-            if (addonNames.length === 1) {
-                base += ` with ${addonNames[0]}`;
-            } else {
-                const last = addonNames.pop();
-                base += ` with ${addonNames.join(', ')} and ${last}`;
-            }
-        }
-
-        base += `. Here’s a quick description of my products…`;
-        return base;
-    }, [activePackage, selectedAddons]);
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText(fullMessageString).then(() => {
-            setShowToast(true);
-            if (toastTimeoutRef.current) {
-                clearTimeout(toastTimeoutRef.current);
-            }
-            toastTimeoutRef.current = window.setTimeout(() => {
-                setShowToast(false);
-            }, 2000);
-        });
+    const handleCopy = (packageName: string) => {
+        const message = `I'd like to book the "${packageName}" package.`;
+        navigator.clipboard.writeText(message);
+        setCopiedPackage(packageName);
+        setTimeout(() => setCopiedPackage(null), 2000);
     };
 
     useEffect(() => {
-        return () => {
-            if (toastTimeoutRef.current) {
-                clearTimeout(toastTimeoutRef.current);
-            }
-        };
+        const interval = setInterval(() => {
+            setActiveTestimonial(prev => (prev + 1) % testimonials.length);
+        }, 5000);
+        return () => clearInterval(interval);
     }, []);
-    
-    const MessageDisplay = () => {
-        const chosenAddons = Object.keys(selectedAddons).filter(key => selectedAddons[key]);
-        let addonsText = '';
-         if (chosenAddons.length > 0) {
-            const addonNames = chosenAddons.map(name => `the "${name}" add-on`);
-            if (addonNames.length === 1) {
-                addonsText = ` with ${addonNames[0]}`;
-            } else {
-                const last = addonNames.pop();
-                addonsText = ` with ${addonNames.join(', ')} and ${last}`;
-            }
-        }
-    
-        return (
-            <p>"I’m interested in the <span className="font-semibold text-[#B394FF]">{activePackage} package</span>{addonsText}. Here’s a quick description of my products..."</p>
-        );
-    };
+
+    const FADE_IN_CLASSES = 'animate-fade-in-up opacity-0';
 
     return (
-        <div className="bg-[#05060A] text-gray-200 font-sans antialiased min-h-screen" style={{ backgroundImage: 'radial-gradient(ellipse 70% 80% at top right, #141827, #05060A)' }}>
-            <header className="min-h-[90vh] flex items-center py-16 md:py-0">
-                <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-                    {/* Text Content */}
+        <main className="bg-black text-white font-sans antialiased overflow-x-hidden">
+            <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-purple-900/40 via-black/0 to-black/0 -z-10"></div>
+            {/* Hero */}
+            <Section className="text-center pt-20">
+                <p style={{'--delay': '0.1s'} as React.CSSProperties} className={`${FADE_IN_CLASSES} text-[12px] font-medium tracking-[2.4px] text-white/55 mb-8`}>• HOLIDAY BOOKING WINDOW • OPEN UNTIL DEC 10TH</p>
+                <h1 style={{'--delay': '0.2s'} as React.CSSProperties} className={`${FADE_IN_CLASSES} text-[32px] md:text-4xl font-semibold leading-[1.1] text-[#F7F5FF] -tracking-[1px] max-w-2xl mx-auto`}>Most brands lose the sale before anyone sees the price.</h1>
+                <p style={{'--delay': '0.3s'} as React.CSSProperties} className={`${FADE_IN_CLASSES} text-[15px] leading-[1.5] text-white/80 max-w-xl mx-auto mt-8 md:mt-10`}>Blurry, DIY photos kill trust. In a sea of holiday noise, professional content isn’t a luxury—it’s your ticket to getting noticed and getting paid.</p>
+            </Section>
+
+            {/* Packages Intro */}
+            <Section>
+                <h2 className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] text-center mb-6">Holiday Content Packages</h2>
+                <div className="bg-[#0E0F1A] border border-white/5 rounded-2xl p-6 grid md:grid-cols-2 gap-x-8 gap-y-6">
                     <div>
-                        <p className="text-sm font-medium uppercase tracking-[0.1em] text-[#7C8191] animate-fade-in-up" style={{ animationDelay: '200ms', opacity: 0 }}>
-                            HOLIDAY BOOKING WINDOW • Christmas content for product brands
-                        </p>
-                        <h1 className="text-4xl sm:text-5xl md:text-[56px] font-semibold text-[#E9E4FF] tracking-tighter leading-tight mt-6 animate-fade-in-up" style={{ animationDelay: '400ms', opacity: 0 }}>
-                            Most brands lose the sale<br/>before anyone sees the price.
-                        </h1>
-                        <p className="text-lg md:text-xl text-[#D7DBE7] mt-8 max-w-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: '600ms', opacity: 0 }}>
-                            Blurry, DIY photos kill trust. Clean, premium visuals make people stop, click, and buy.
-                        </p>
-                    </div>
-                </div>
-            </header>
-
-            <main>
-                <Section>
-                    <div className="text-center max-w-4xl mx-auto">
-                        <SectionTitle>Holiday Content Packages</SectionTitle>
-                        <p className="text-lg text-[#D7DBE7] mt-8 leading-relaxed">All packages are:</p>
-                        <ul className="mt-4 space-y-3 text-gray-300 text-left inline-block max-w-md">
-                           <li className="flex items-start"><CheckIcon /><span className="ml-3">Shot & directed by a professional creative director</span></li>
-                           <li className="flex items-start"><CheckIcon /><span className="ml-3">Delivered ready to post</span></li>
-                           <li className="flex items-start"><CheckIcon /><span className="ml-3">Designed to work across Instagram, TikTok, website, Google & Facebook ads</span></li>
+                        <p className="text-[15px] font-regular leading-[1.5] text-white/80 mb-4">All packages are shot & directed by a professional team with years of e-commerce experience.</p>
+                        <ul className="space-y-2 text-[15px] font-regular leading-[1.5] text-white/80">
+                            <li className="flex items-center gap-3"><CheckmarkLineIcon /> Ready to post on social, website & ads</li>
+                            <li className="flex items-center gap-3"><CheckmarkLineIcon /> Designed to work across multiple platforms</li>
+                            <li className="flex items-center gap-3"><CheckmarkLineIcon /> High-resolution for crystal-clear quality</li>
                         </ul>
-                         <p className="text-lg text-[#D7DBE7] mt-8 leading-relaxed">
-                            Video content gets shared up to <span className="font-bold text-white text-2xl">1200% more</span> than photos alone – <br className="hidden sm:block" /> That’s why every package includes FREE video content.
-                        </p>
                     </div>
-                    
-                    <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mt-16 items-stretch">
-                        {packages.map((pkg) => (
-                           <PackageCard key={pkg.title} pkg={pkg} />
-                        ))}
+                    <div className="bg-slate-800/50 border border-white/10 rounded-lg p-4 flex flex-col justify-center text-center">
+                        <p className="text-[18px] font-semibold leading-[1.3] text-[#E2E0F0]">Video content gets shared up to <span className="text-cyan-300">1200%</span> more than photos alone.</p>
+                        <p className="text-[15px] font-regular leading-[1.5] text-white/80 mt-2">That’s why every package includes free video content.</p>
                     </div>
-                </Section>
-                
-                <Section>
-                    <SectionTitle>Compare Packages</SectionTitle>
-                    <div className="mt-12 bg-gradient-to-b from-[#121520] to-[#070910] rounded-3xl p-4 md:p-8 overflow-x-auto" style={{boxShadow: '0 0 0 1px rgba(255,255,255,0.04) inset, 0 16px 40px rgba(0,0,0,0.6)'}}>
-                        <div className="min-w-[600px] md:min-w-full">
-                            <div className="grid grid-cols-4 gap-2 text-center font-semibold text-sm md:text-base">
-                                <div className="text-left p-3">Feature</div>
-                                {packages.map(p => <div key={p.title} className={`p-3 ${p.isPopular ? 'text-[#B394FF]' : 'text-white'}`}>{p.title}</div>)}
-                            </div>
-                            {comparisonFeatures.map((feat, idx) => (
-                                <div key={idx} className={`grid grid-cols-4 gap-2 items-center text-center text-sm rounded-lg`}>
-                                    <div className="font-medium text-gray-300 text-left p-3">{feat.feature}</div>
-                                    {feat.values.map((val, valIdx) => (
-                                        <div key={valIdx} className={`text-gray-200 h-full flex items-center justify-center p-3 rounded-md ${packages[valIdx].isPopular ? 'bg-white/5' : ''}`}>
-                                            {typeof val === 'boolean' ? (val ? <CheckIcon /> : <MinusIcon />) : <span className="text-xs md:text-sm">{val}</span>}
-                                        </div>
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </Section>
-                
-                <Section>
-                    <SectionTitle>Why Investing Now Matters</SectionTitle>
-                     <div className="max-w-3xl mx-auto grid md:grid-cols-1 gap-4 mt-8">
-                        {whyInvestItems.map((item) => (
-                            <div key={item.label} className="p-5 rounded-2xl bg-gradient-to-b from-[#10121A] to-[#080A10] border border-white/5">
-                                <div className="flex items-center">
-                                    <IconWrapper className="text-gray-400 mr-4 w-5 h-5">{item.icon}</IconWrapper>
-                                    <h3 className="text-sm font-medium text-[#E3E1F5] uppercase tracking-[0.1em]">
-                                        {item.label}
-                                    </h3>
-                                </div>
-                                <div className="w-8 h-px bg-white/10 my-2.5 ml-[36px]"></div>
-                                <p className="text-sm text-gray-400 leading-relaxed ml-[36px]">
-                                    {item.body}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </Section>
-                
-                <Section>
-                    <SectionTitle>Trusted by Brands Like Yours</SectionTitle>
-                    <p className="text-center text-lg text-gray-400 mt-4">A few notes from teams who booked holiday shoots.</p>
-                     <div className="relative mt-12 max-w-2xl mx-auto">
-                        <div className="overflow-hidden rounded-3xl">
-                            <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}>
-                                {testimonials.map((t, index) => (
-                                    <div key={index} className="w-full flex-shrink-0">
-                                        <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-b from-[#121520] to-[#070910] h-full flex flex-col justify-center" style={{boxShadow: '0 0 0 1px rgba(255,255,255,0.04) inset, 0 16px 40px rgba(0,0,0,0.6)', minHeight: '260px'}}>
-                                            <p className="text-base md:text-lg text-gray-300 leading-relaxed flex-grow text-center italic">"{t.quote}"</p>
-                                            <div className="flex flex-col items-center mt-6">
-                                                <div className="text-center">
-                                                    <p className="font-semibold text-sm text-white">{t.name}</p>
-                                                    <p className="text-sm text-[#A071FF]">{t.brand}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        <button onClick={prevTestimonial} aria-label="Previous testimonial" className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 bg-white/5 hover:bg-white/10 text-white rounded-full p-2 transition-colors focus:outline-none focus:ring-2 focus:ring-[#A071FF] z-10">
-                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
-                        </button>
-                        <button onClick={nextTestimonial} aria-label="Next testimonial" className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 bg-white/5 hover:bg-white/10 text-white rounded-full p-2 transition-colors focus:outline-none focus:ring-2 focus:ring-[#A071FF] z-10">
-                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                        </button>
-                        
-                        <div className="flex justify-center gap-2 mt-6">
-                            {testimonials.map((_, index) => (
-                                <button key={index} onClick={() => setCurrentTestimonial(index)} aria-label={`Go to testimonial ${index + 1}`} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${currentTestimonial === index ? 'bg-white w-5' : 'bg-white/20 hover:bg-white/40'}`} />
-                            ))}
-                        </div>
-                    </div>
-                </Section>
-
-                <Section>
-                    <div className="text-center max-w-3xl mx-auto">
-                        <SectionTitle>Supercharge Your Package</SectionTitle>
-                        <p className="text-lg text-gray-400 mt-4">Pick optional upgrades to dial in exactly what you need.</p>
-                    </div>
-                    <div className="max-w-3xl mx-auto mt-12 space-y-3">
-                        {addonCategories.map(category => {
-                            const CategoryIcon = category.icon;
-                            return (
-                                <div key={category.id} className="bg-[#0C0F16] border border-white/5 rounded-2xl overflow-hidden transition-all duration-300">
-                                    <button onClick={() => toggleAccordion(category.id)} className="w-full flex justify-between items-center p-5 text-left hover:bg-white/5 transition-colors" aria-expanded={openAccordion === category.id}>
-                                        <div className="flex items-center">
-                                            <IconWrapper className="mr-4 text-[#A071FF]"><CategoryIcon /></IconWrapper>
-                                            <span className="font-semibold text-white text-base md:text-lg">{category.title}</span>
-                                        </div>
-                                        <div className="flex items-center gap-4">
-                                          <span className="text-xs text-gray-500 hidden sm:inline">From +CA${Math.min(...category.items.map(i => i.price))}</span>
-                                          <ChevronIcon className={`transition-transform duration-300 ${openAccordion === category.id ? 'rotate-180' : ''}`} />
-                                        </div>
-                                    </button>
-                                    {openAccordion === category.id && (
-                                        <div className="px-5 pb-5 bg-black/20">
-                                            <div className="border-t border-white/10 pt-5 space-y-5">
-                                                {category.items.map((item, index) => (
-                                                    <label key={index} className="flex items-start cursor-pointer group">
-                                                         <div className="mt-1 mr-4 flex items-center">
-                                                            <input type="checkbox" className="sr-only peer" checked={!!selectedAddons[item.name]} onChange={() => handleAddonToggle(item.name)} />
-                                                            <div className="w-5 h-5 bg-gray-800 rounded-md border-2 border-gray-600 flex items-center justify-center peer-checked:bg-[#A071FF] peer-checked:border-[#A071FF] transition-all duration-200">
-                                                                <svg className="w-3 h-3 text-black hidden peer-checked:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex-grow">
-                                                            <div className="flex justify-between items-start gap-4">
-                                                                <p className="font-medium text-gray-200 text-base leading-snug group-hover:text-white transition-colors">{item.name}</p>
-                                                                <p className="font-mono text-base text-[#B394FF] whitespace-nowrap">+CA${item.price}</p>
-                                                            </div>
-                                                            <p className="text-sm text-gray-500 mt-1.5 leading-relaxed">{item.description}</p>
-                                                        </div>
-                                                    </label>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            )
-                        })}
-                    </div>
-                </Section>
-                
-                <Section>
-                     <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#402269] to-[#27123E] border border-[#B394FF]/30 shadow-2xl shadow-[#B394FF]/10">
-                        <h2 className="text-2xl font-bold text-white text-center mb-2">Limited-Time December Offer</h2>
-                        <p className="text-base text-gray-300 text-center mb-8">Book before <span className="font-semibold text-white">November 25th</span> and stack these bonuses:</p>
-                        <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-base text-gray-200 max-w-2xl mx-auto mb-10">
-                            <div className="flex items-center"><CheckIcon /><span className="ml-3"><span className="font-bold text-lg text-white">15% OFF</span> any package (save up to CA$150)</span></div>
-                            <div className="flex items-center"><CheckIcon /><span className="ml-3"><strong>FREE</strong> express delivery (CA$100 value)</span></div>
-                            <div className="flex items-center"><CheckIcon /><span className="ml-3"><strong>PRIORITY</strong> scheduling in the shoot calendar</span></div>
-                            <div className="flex items-center"><CheckIcon /><span className="ml-3"><strong>FREE</strong> social caption templates (CA$75 value)</span></div>
-                        </div>
-                        <div className="text-center">
-                            <div className="inline-block bg-[#F6C26E]/20 border border-[#F6C26E]/50 text-[#F6C26E] text-sm font-semibold text-center py-2 px-5 rounded-full">
-                                Only <span className="font-bold text-xl text-white">8 spots</span> left for guaranteed pre-Christmas delivery.
-                            </div>
-                        </div>
-                     </div>
-                </Section>
-                
-                <Section className="text-center">
-                    <SectionTitle>Ready for Your Best Holiday Season Yet?</SectionTitle>
-                    <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">Reply with your chosen package and a bit about your products. I’ll handle the visuals that sell them.</p>
-                     <div className="mt-8 flex justify-center items-center gap-2 flex-wrap">
-                        {packages.map(p => (
-                            <button key={p.title} onClick={() => setActivePackage(p.title)} className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-colors duration-200 ${activePackage === p.title ? 'bg-[#A071FF] text-black' : 'bg-white/5 hover:bg-white/10 text-white'}`}>
-                                {p.title} Package
-                            </button>
-                        ))}
-                    </div>
-                    <div className="max-w-lg mx-auto mt-6">
-                        <p className="text-xs text-gray-500 mb-2">Tap to copy and paste into Messenger, Instagram, or email.</p>
-                        <div onClick={handleCopy} className="cursor-pointer text-left text-sm text-gray-400 border border-white/10 bg-[#10121A] rounded-xl p-4 flex justify-between items-center gap-4 group hover:border-white/20 transition-colors">
-                            <div className="flex-grow">
-                                <MessageDisplay />
-                            </div>
-                            <div className="flex flex-col items-center text-gray-500 group-hover:text-white transition-colors flex-shrink-0">
-                                <CopyIcon />
-                                <span className="text-xs mt-1">Copy</span>
-                            </div>
-                        </div>
-                    </div>
-                </Section>
-            </main>
-            {showToast && (
-                <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-white text-black text-sm font-semibold py-2 px-4 rounded-full shadow-lg z-50 animate-fade-in-up">
-                    Copied to clipboard
                 </div>
-            )}
-        </div>
+            </Section>
+
+            {/* Package Cards */}
+            <Section className="!max-w-5xl">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {packages.map((pkg, index) => (
+                        <PackageCard key={index} packageInfo={pkg} isFeatured={pkg.isMostBooked} />
+                    ))}
+                </div>
+            </Section>
+
+            {/* Compare Packages */}
+            <Section>
+                <h2 className="text-center text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] mb-6">Compare Packages</h2>
+                <div className="bg-[#0E0F1A] border border-white/5 rounded-2xl overflow-hidden">
+                    <div className="overflow-x-auto scrollbar-hide">
+                        <table className="w-full text-left">
+                            <thead>
+                                <tr className="border-b border-white/10">
+                                    {comparisonData.headers.map((header, i) => (
+                                        <th key={i} className={`p-4 text-[12px] font-medium tracking-wider text-white/55 whitespace-nowrap ${i > 0 ? 'text-center' : ''} ${i === 2 ? 'text-purple-300' : ''}`}>{header}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {comparisonData.rows.map((row, i) => (
+                                    <tr key={i} className="border-b border-white/5 last:border-b-0">
+                                        <td className="p-4 text-[15px] font-regular leading-[1.5] text-white/80 whitespace-nowrap">{row.feature}</td>
+                                        {row.values.map((val, j) => (
+                                            <td key={j} className="p-4 text-center text-[15px] font-regular leading-[1.5] text-white/60 whitespace-nowrap">
+                                                <div className={`flex justify-center items-center ${j === 1 ? 'text-purple-300 font-medium' : ''}`}>
+                                                    {val}
+                                                </div>
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </Section>
+
+            {/* Why Investing Now Matters */}
+            <Section>
+                <h2 className="text-center text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] mb-6">Why Investing Now Matters</h2>
+                <div className="grid md:grid-cols-3 gap-4">
+                    {investmentReasons.map((reason, i) => (
+                        <div key={i} className="bg-[#0E0F1A] border border-white/5 rounded-2xl p-5 text-center">
+                            <IconWrapper className="w-10 h-10 bg-purple-500/10 text-purple-300 rounded-lg mb-4">
+                                <reason.icon />
+                            </IconWrapper>
+                            <p className="text-[12px] font-medium tracking-[2.4px] text-white/55 mb-1">{reason.label}</p>
+                            <div className="w-6 h-[1px] bg-white/20 mx-auto my-2"></div>
+                            <p className="text-[15px] font-regular leading-[1.5] text-white/80">{reason.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </Section>
+
+            {/* Testimonials */}
+            <Section>
+                <h2 className="text-center text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] mb-2">Trusted by Brands Like Yours</h2>
+                <p className="text-center text-[15px] leading-[1.5] text-white/60 mb-6">A few notes from teams who invested in quality.</p>
+                <div className="relative h-48">
+                    {testimonials.map((testimonial, index) => (
+                        <div key={index}
+                             className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === activeTestimonial ? 'opacity-100' : 'opacity-0'}`}
+                        >
+                            <div className="bg-[#0E0F1A] border border-white/5 rounded-2xl p-6 h-full flex flex-col justify-center items-center text-center">
+                                <p className="text-[18px] font-regular leading-[1.3] text-[#E2E0F0]">"{testimonial.quote}"</p>
+                                <div className="mt-4">
+                                    <p className="text-[15px] font-semibold leading-[1.5] text-white/80">{testimonial.name}</p>
+                                    <p className="text-[12px] font-medium tracking-wider text-purple-300" style={{ color: testimonial.color }}>{testimonial.company}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className="flex justify-center gap-2 mt-4">
+                    {testimonials.map((_, index) => (
+                        <button key={index} onClick={() => setActiveTestimonial(index)} className={`w-2 h-2 rounded-full transition-colors ${index === activeTestimonial ? 'bg-white' : 'bg-white/20 hover:bg-white/40'}`}></button>
+                    ))}
+                </div>
+            </Section>
+
+            {/* Supercharge Your Package */}
+            <Section>
+                <div className="text-center mb-8 mt-6">
+                    <h2 className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8]">Supercharge Your Package</h2>
+                    <p className="text-[15px] leading-[1.5] text-white/60 mt-2">Pick optional upgrades to perfectly match your campaign goals.</p>
+                </div>
+                <div className="bg-[#0E0F1A] border border-white/5 rounded-2xl p-2 md:p-4">
+                    {addonCategories.map(category => <Accordion key={category.id} category={category} />)}
+                </div>
+            </Section>
+
+            {/* Limited-Time Offer */}
+            <Section>
+                <div className="bg-gradient-to-br from-purple-800/50 to-indigo-800/30 border border-purple-400/30 rounded-3xl p-6 md:p-8 text-center relative overflow-hidden">
+                    <div className="absolute -top-10 -right-10 w-28 h-28 bg-yellow-400/80 rounded-full blur-3xl"></div>
+                    <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-cyan-400/60 rounded-full blur-3xl"></div>
+                    <h2 className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8] mb-4">{offerDetails.title}</h2>
+                    <ul className="space-y-2 inline-block text-left mb-4">
+                        {offerDetails.features.map((feature, i) => (
+                            <li key={i} className="flex items-center gap-2 text-[15px] font-regular leading-[1.5] text-white/80">
+                                <SparklesIcon /> {feature}
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="mt-4 bg-yellow-400/20 border border-yellow-400/50 text-yellow-200 text-base font-semibold px-4 py-2 rounded-lg inline-block">
+                        {offerDetails.scarcity}
+                    </div>
+                </div>
+            </Section>
+
+            {/* Final CTA */}
+            <Section className="text-center">
+                <h2 className="text-[32px] font-semibold leading-[1.1] text-[#F7F5FF] -tracking-[1px] max-w-lg mx-auto">Ready for Your Best Holiday Season Yet?</h2>
+                <p className="text-[15px] leading-[1.5] text-white/60 mt-4 mb-8 max-w-md mx-auto">Reply with your chosen package to lock in your spot. We'll handle the rest.</p>
+                <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                    {packages.map(pkg => (
+                        <button key={pkg.name} onClick={() => handleCopy(pkg.name)} className={`w-full md:w-auto px-6 py-3 rounded-xl font-semibold text-base transition-all duration-200 border-2 ${pkg.isMostBooked ? 'bg-[#B394FF] text-black border-transparent hover:bg-white' : 'bg-transparent border-white/20 text-white/80 hover:bg-white/10 hover:border-white/40'}`}>
+                            {copiedPackage === pkg.name ? 'Copied!' : `Book "${pkg.name}"`}
+                        </button>
+                    ))}
+                </div>
+                <p className="text-[12px] font-medium tracking-wider text-white/55 mt-4">Tap to copy booking message</p>
+            </Section>
+
+            {/* Message Card */}
+            <Section className="pb-20">
+                <div className="bg-[#121422] border border-white/10 rounded-2xl p-4 flex items-start gap-3">
+                    <IconWrapper className="w-8 h-8 rounded-full bg-slate-700/80 shrink-0">
+                        <CopyIcon />
+                    </IconWrapper>
+                    <div>
+                        <p className="text-[15px] font-regular leading-[1.5] text-white/80">
+                            I'd like to book the "<span className="font-semibold text-[#B394FF]">Essentials</span>" package.
+                        </p>
+                        <p className="text-[12px] text-white/50 mt-1">Example message</p>
+                    </div>
+                </div>
+            </Section>
+        </main>
     );
 };
 
