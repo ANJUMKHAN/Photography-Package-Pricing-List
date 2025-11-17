@@ -18,7 +18,7 @@ const CopyIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewB
 
 
 const ChevronIcon: React.FC<{ className?: string }> = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className={`w-5 h-5 ${className}`}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
-const CheckmarkLineIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-[#55E6C1] opacity-70"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
+const CheckmarkLineIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-[#55E6C1] opacity-70 shrink-0 mt-1"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
 
 const MinusIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-600"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" /></svg>;
 
@@ -225,64 +225,54 @@ const PackageCard: React.FC<{ packageInfo: typeof packages[0], isFeatured?: bool
     return (
         <div className={`${cardBaseClasses} ${isFeatured ? featuredClasses : standardClasses}`}>
             {/* Header band */}
-            <div className="flex justify-between items-start mb-4">
-                <div className="flex flex-col gap-2">
-                    {isMostBooked && <p className="text-[12px] font-medium tracking-[1.2px] text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full w-fit">MOST BOOKED</p>}
-                    <div>
-                        <h3 className="text-[18px] font-semibold leading-[1.3] text-[#E2E0F0]">{name}</h3>
-                        <p className="text-[12px] font-medium text-white/50 tracking-wider">{description}</p>
-                    </div>
-                </div>
-                <div className="text-right">
-                    <p className="text-[24px] font-semibold leading-[1.2] text-[#F0EEF8]">
-                        <span className="text-[16px] align-baseline">CA$</span>{price}
-                    </p>
-                    <p className="text-[12px] font-medium text-white/50 tracking-wider">Per content package</p>
-                </div>
+            <div className="mb-4">
+                 {isMostBooked && <p className="text-[12px] font-medium tracking-[1.2px] text-purple-300 bg-purple-500/20 px-3 py-1 rounded-full w-fit mb-3">MOST BOOKED</p>}
+                <h3 className="text-xl font-semibold text-[#E2E0F0]">{name} Package</h3>
+                <p className="text-4xl font-bold text-[#F7F5FF] mt-1">
+                    <span className="text-lg font-medium text-white/50 align-baseline mr-1">CA$</span>{price}
+                </p>
+                <p className="text-sm font-medium text-white/50 tracking-wider mt-1">{description}</p>
             </div>
 
             {/* Promise band */}
             <p className="text-[15px] font-regular leading-[1.5] text-white/80 my-3">{promise}</p>
 
-            {/* Content band */}
-            <div className="my-4">
-                <div className="flex flex-col items-center mb-4">
-                    <p className="text-[12px] font-medium tracking-[1.2px] uppercase text-white/50">Content You Get</p>
-                    <div className="w-6 h-[1px] bg-white/20 mt-2"></div>
-                </div>
+            {/* Separator */}
+            <div className="w-full h-px bg-white/10 my-4"></div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                    {/* Photos */}
-                    <div>
-                        <p className="text-[13px] font-medium text-white/70 mb-2">Photos</p>
-                        <ul className="space-y-2">
-                            {photos.map((item, i) => (
-                                <li key={i} className="flex items-start gap-2">
-                                    <CheckmarkLineIcon />
-                                    <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+            {/* Features List */}
+            <div className="space-y-5 flex-grow">
+                {/* Photos */}
+                <ul className="space-y-2.5">
+                    {photos.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                            <CheckmarkLineIcon />
+                            <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
+                        </li>
+                    ))}
+                </ul>
 
-                    {/* Video Bonus */}
-                    <div className="bg-green-900/20 border border-green-500/20 rounded-2xl p-4">
-                        <p className="text-[13px] font-semibold text-green-300">Holiday video bonus included</p>
-                        <p className="text-[12px] font-medium text-green-400/70 mb-2">CA${videoBonus.value} value</p>
-                        <ul className="space-y-1.5">
-                            {videoBonus.items.map((item, i) => (
-                                <li key={i} className="flex items-start gap-2">
-                                    <CheckmarkLineIcon />
-                                    <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
-                                </li>
-                            ))}
-                        </ul>
+                {/* Video Bonus */}
+                <div className="bg-green-900/20 border border-green-500/20 rounded-2xl p-4">
+                    <div className="flex justify-between items-center mb-2">
+                        <p className="text-[13px] font-semibold text-green-300">Holiday Video Bonus</p>
+                        <span className="text-xs font-bold text-red-400 line-through">
+                            CA${videoBonus.value} value
+                        </span>
                     </div>
+                    <ul className="space-y-1.5">
+                        {videoBonus.items.map((item, i) => (
+                            <li key={i} className="flex items-start gap-3">
+                                <CheckmarkLineIcon />
+                                <span className="text-[15px] font-regular leading-[1.5] text-white/80">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
 
             {/* Meta band */}
-            <div className="mt-auto pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <div className="mt-auto pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                 <p className="text-[15px] font-semibold text-[#55E6C1]">You save: CA${videoBonus.value}</p>
                 <p className="text-[12px] font-medium text-purple-300 bg-purple-500/20 px-3 py-1.5 rounded-full text-center">{bestFor}</p>
             </div>
@@ -461,8 +451,8 @@ const App = () => {
                 <p className="text-[15px] leading-[1.5] text-white/60 mt-4 mb-8 max-w-md mx-auto">Reply with your chosen package to lock in your spot. We'll handle the rest.</p>
                 <div className="flex flex-col md:flex-row justify-center items-center gap-4">
                     {packages.map(pkg => (
-                        <button key={pkg.name} onClick={() => handleCopy(pkg.name)} className={`w-full md:w-auto px-6 py-3 rounded-xl font-semibold text-base transition-all duration-200 border-2 ${pkg.isMostBooked ? 'bg-[#B394FF] text-black border-transparent hover:bg-white' : 'bg-transparent border-white/20 text-white/80 hover:bg-white/10 hover:border-white/40'}`}>
-                            {copiedPackage === pkg.name ? 'Copied!' : `Book "${pkg.name}"`}
+                        <button key={pkg.name} onClick={() => handleCopy(`${pkg.name} Package`)} className={`w-full md:w-auto px-6 py-3 rounded-xl font-semibold text-base transition-all duration-200 border-2 ${pkg.isMostBooked ? 'bg-[#B394FF] text-black border-transparent hover:bg-white' : 'bg-transparent border-white/20 text-white/80 hover:bg-white/10 hover:border-white/40'}`}>
+                            {copiedPackage === `${pkg.name} Package` ? 'Copied!' : `Book "${pkg.name} Package"`}
                         </button>
                     ))}
                 </div>
@@ -477,7 +467,7 @@ const App = () => {
                     </IconWrapper>
                     <div>
                         <p className="text-[15px] font-regular leading-[1.5] text-white/80">
-                            I'd like to book the "<span className="font-semibold text-[#B394FF]">Essentials</span>" package.
+                            I'd like to book the "<span className="font-semibold text-[#B394FF]">Essentials Package</span>".
                         </p>
                         <p className="text-[12px] text-white/50 mt-1">Example message</p>
                     </div>
